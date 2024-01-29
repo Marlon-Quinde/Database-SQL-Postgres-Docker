@@ -1,13 +1,15 @@
 
 -- 1. Cuantos usuarios tenemos con cuentas @google.com
 -- Tip: count, like
-
+select count(*) as "Cuentas Google" from users u where u.email like '%@google.com' 
 
 -- 2. De qué países son los usuarios con cuentas de @google.com
 -- Tip: distinct
+select distinct u.country  from users u where u.email like '%@google.com'
 
 -- 3. Cuantos usuarios hay por país (country)
 -- Tip: Group by
+select u.country ,count(*) as "Cantidad" from users u group by u.country order by u.country ASC
 
 
 -- 4. Listado de direcciones IP de todos los usuarios de Iceland

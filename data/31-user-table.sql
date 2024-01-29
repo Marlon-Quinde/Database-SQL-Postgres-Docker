@@ -1,5 +1,5 @@
 -- Table Definition
-DROP TABLE users;
+drop TABLE IF EXISTS users;
 
 CREATE TABLE users (
     "id" varchar(36) NOT NULL DEFAULT gen_random_uuid(),
