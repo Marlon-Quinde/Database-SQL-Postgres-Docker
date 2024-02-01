@@ -42,5 +42,10 @@ set continent = (select c2.code from continent c2 where c2.name = c.continent);
 
 alter table country drop constraint country_continent_check;
 
+-- ALTERAR LA COLUMNA DE LA TABLA PARA CAMBIAR EL TIPO DE DATO
+ALTER TABLE country
+ALTER COLUMN continent TYPE int4
+USING continent::integer;
+
 
 
