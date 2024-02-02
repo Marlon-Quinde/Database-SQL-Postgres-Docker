@@ -29,12 +29,21 @@ CREATE TABLE "public"."country_bk" (
 insert into country_bk 
 select * from country 
 
+alter table continents rename to continent
+
+alter table continent  rename column continents to name; 
+
+alter table continent 
 
 select 
 	c."name", c."continent",
-	(select c2.code from continent c2 where c2.name = c.continent)
+	(select c2.code from continent c2 where c2."name" = c.continent)
 from 
 	country c 
+	
+	
+-- Quitar el constraint
+alter table country drop constraint country_continent_check;
 	
 update country c
 set continent = (select c2.code from continent c2 where c2.name = c.continent);

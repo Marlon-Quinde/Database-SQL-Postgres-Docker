@@ -38,8 +38,14 @@ ALTER COLUMN code TYPE int4
 USING code::integer;
 
 -- Crear el forening key y constraints de no nulo el language_code
+
+UPDATE countrylanguage cl
+SET "languagecode" = (SELECT l.code FROM "language" l WHERE cl."language" = l.name )
+
+
 ALTER TABLE countrylanguage
-ALTER languagecode SET NOT NULL;
+ALTER COLUMN languagecode SET NOT NULL;
 
 
 -- Revisar lo creado
+SELECT * FROM countrylanguage cl
