@@ -38,3 +38,42 @@ WHERE UPPER(c2."name") LIKE UPPER('%America%'))
 ORDER BY
 	"Cantidad" ASC
 	
+	
+-- Quiero que me muestren el pais con mas ciudades
+--  Campos: total de ciudades y el nombre del pais
+-- usar inner join
+
+SELECT COUNT(*) as "Ciudades", c."name" 
+FROM country c
+INNER JOIN city ci ON ci.countrycode = c.code
+GROUP BY
+	c."name" 
+ORDER BY
+	"Ciudades" DESC
+LIMIT 1	
+
+
+SELECT * FROM countrylanguage cl WHERE cl.isofficial IS TRUE
+
+SELECT * FROM country c 
+
+SELECT * FROM continent c 
+
+
+SELECT DISTINCT l."name"  ,cl.languagecode  , c.continent, ct."name"  FROM countrylanguage cl 
+INNER JOIN country c ON c.code = cl.countrycode 
+INNER JOIN continent ct ON c.continent = ct.code  
+INNER JOIN "language" l ON l.code = cl.languagecode  
+WHERE cl.isofficial IS TRUE
+
+-- Cuantos idiomas se hablan por contiente
+SELECT COUNT(*), "Continente"  FROM (
+SELECT DISTINCT cl."language", c.continent, ct."name"  as "Continente" FROM countrylanguage cl 
+INNER JOIN country c ON c.code = cl.countrycode 
+INNER JOIN continent ct ON c.continent = ct.code  
+WHERE cl.isofficial IS TRUE
+) AS "Totales"
+GROUP BY
+	"Continente" 
+
+
