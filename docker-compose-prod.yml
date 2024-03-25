@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  myDB:
+    image: postgres:latest
+    container_name: database
+    restart: always
+    ports:
+      - 5432:5432
+    env_file:
+      - fileName
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    ports: 8080:80
+    depends_on:
+      - myDB
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=alumno@google.com
+      - PGADMIN_DEFAULT_PASSWORD=123456
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin
+      - ./pgadmin:/certs/server.cert
+      - ./pgadmin:/certs/server.key
+      - ./pgadmin:/pgadmin4/servers.json

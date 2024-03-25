@@ -1,2 +1,4 @@
 /pgadmin
 /postgres
+
+.env
